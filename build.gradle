@@ -42,6 +42,9 @@ dependencies {
 	testImplementation 'org.springframework.modulith:spring-modulith-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	
+	//google api 사용을 위한 라이브러리
+	compileOnly 'com.google.api-client:google-api-client:1.32.1'
 }
 
 dependencyManagement {
