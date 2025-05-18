@@ -11,6 +11,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.client.RestTemplate;
 
+import com.memo.common.oauth.google.CustomOAuthService;
+
 @Configuration
 @EnableWebSecurity
 public class OAuth2LoginSecurityConfig {
@@ -24,8 +26,10 @@ public class OAuth2LoginSecurityConfig {
 		http
 			.authorizeHttpRequests(authorize -> authorize
 				.anyRequest().authenticated())
-			.oauth2Login(withDefaults()
-
+			.oauth2Login(oauth2 -> oauth2
+				.userInfoEndpoint(userInfo -> userInfo
+					.userService(new CustomOAuthService())
+				)
 			);
 		return http.build();
 	}
