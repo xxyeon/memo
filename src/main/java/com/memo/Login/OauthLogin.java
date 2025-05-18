@@ -25,19 +25,5 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class OauthLogin {
 
-	private final CustomOAuthService customOAuthService;
-
-	// /login/oauth2로 요청을 하면 내부에서 구글 서버로 승인 코드를 받기위해 요청을 하고 우리가 설정한 리다이렉션으로 승인 코드 받은 후 엑세스토큰 발급 후 사용자 정보 가져오는 것 까지
-	@GetMapping("/login/oauth2")
-	public void googleLogin(HttpServletResponse response) throws IOException {
-		String requestURL = customOAuthService.request();
-		response.sendRedirect(requestURL);
-	}
-
-	@GetMapping("/login/oauth2/code/google")
-	public ResponseEntity<String> callback(@RequestParam(name = "code") String code) throws JsonProcessingException {
-		customOAuthService.oAuthLogin(code);
-		return new ResponseEntity<>("ok", HttpStatus.OK);
-	}
 
 }
